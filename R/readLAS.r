@@ -125,9 +125,7 @@ readLAS = function(LASfile, short = TRUE, fields)
         n = numberPointRecords, signed = FALSE, endian = "little")
     bytesList <- readBin(t(allbytes[, 15]), "integer", size = 1, 
         n = numberPointRecords, signed = FALSE, endian = "little")
-    Classification <- readBin(t(allbytes[, 16]), "integer", 
-        size = 1, n = numberPointRecords, signed = FALSE, 
-        endian = "little")
+    UserData <-readBin(t(allbytes[, 18]), "integer", size = 1, n = numberPointRecords, signed = FALSE, endian = "little")
        
-    return(cbind(mm, Classification))
+    return(cbind(mm, UserData))
 }
