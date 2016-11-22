@@ -121,11 +121,14 @@ readLAS = function(LASfile, short = TRUE, fields)
     mm[, 3] <- mm[, 3] * xyzScaleOffset[3, 1] + xyzScaleOffset[3, 
         2]
     colnames(mm) <- c("X", "Y", "Z")
-    Intensity <- readBin(t(allbytes[, 13:14]), "integer", size = 2, 
-        n = numberPointRecords, signed = FALSE, endian = "little")
-    bytesList <- readBin(t(allbytes[, 15]), "integer", size = 1, 
-        n = numberPointRecords, signed = FALSE, endian = "little")
+    Classification <- readBin(t(allbytes[, 16]), "integer", 
+        size = 1, n = numberPointRecords, signed = FALSE, 
+        endian = "little")
+    # Intensity <- readBin(t(allbytes[, 13:14]), "integer", size = 2, 
+    #     n = numberPointRecords, signed = FALSE, endian = "little")
+    # bytesList <- readBin(t(allbytes[, 15]), "integer", size = 1, 
+    #     n = numberPointRecords, signed = FALSE, endian = "little")
     #UserData <-readBin(t(allbytes[, 18]), "integer", size = 1, n = numberPointRecords, signed = FALSE, endian = "little")
        
-    return(cbind(mm))
+    return(cbind(mm, Classification))
 }
